@@ -24,3 +24,39 @@ void setup() {
     score = 0;
     tailLength = 0;
 }
+void draw() {
+    clear();
+    for (int i = 0; i < width + 2; i++)
+        printw("#");
+    printw("\n");
+
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (j == 0)
+                printw("#");
+            if (i == y && j == x)
+                printw("O");
+            else if (i == foody && j == foodx)
+                printw("F");
+            else {
+                bool printTail = false;
+                for (int k = 0; k < tailLength; k++) {
+                    if (tailX[k] == j && tailY[k] == i) {
+                        printw("o");
+                        printTail = true;
+                    }
+                }
+                if (!printTail)
+                    printw(" ");
+            }
+            if (j == width - 1)
+                printw("#");
+        }
+        printw("\n");
+    }
+
+    for (int i = 0; i < width + 2; i++)
+        printw("#");
+    
+    printw("\nScore: %d\n", score);
+}
