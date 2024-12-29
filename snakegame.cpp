@@ -127,3 +127,18 @@ void logic() {
         }
     }
 }
+int main() {
+    srand(time(0));
+    
+    initscr(); // Start ncurses mode
+    setup();
+
+    while (!gameOver) {
+        draw();
+        input();
+        logic();
+    }
+
+    endwin(); // End ncurses mode
+    return 0;
+}
