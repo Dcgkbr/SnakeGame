@@ -60,3 +60,26 @@ void draw() {
     
     printw("\nScore: %d\n", score);
 }
+void input() {
+    keypad(stdscr, TRUE);
+    halfdelay(1); // wait for input for a short period
+    int c = getch();
+    
+    switch (c) {
+        case 'a':
+            dir = LEFT;
+            break;
+        case 'w':
+            dir = UP;
+            break;
+        case 'd':
+            dir = RIGHT;
+            break;
+        case 's':
+            dir = DOWN;
+            break;
+        case 'x':
+            gameOver = true;
+            break;
+    }
+}
