@@ -83,3 +83,47 @@ void input() {
             break;
     }
 }
+void logic() {
+    int prevX = tailX.empty() ? x : tailX[0];
+    int prevY = tailY.empty() ? y : tailY[0];
+    int prev2X, prev2Y;
+
+    tailX.insert(tailX.begin(), x);
+    tailY.insert(tailY.begin(), y);
+    
+    if (tailLength > 0) {
+        prev2X = tailX[1];
+        prev2Y = tailY[1];
+        for (int i = 1; i < tailLength; i++) {
+            tailX[i] = prevX;
+            tailY[i] = prevY;
+
+            prevX = tailX[i + 1];
+            prevY = tailY[i + 1];
+        }
+    }
+
+    switch (dir) {
+        case LEFT: x--; break;
+        case RIGHT: x++; break;
+        case UP: y--; break;
+        case DOWN: y++; break;
+        default: break;
+    }
+
+    if (x >= width) x = 0; else if (x < 0) x = width - 1;
+    if (y >= height) y = 0; else if (y < 0) y = height - 1;
+
+    if (x == foodx && y == foody) {
+        score += 10;
+        foodx = rand() % width;
+        foody = rand() % height;
+        tailLength++;
+    }
+
+    for (int i = 0; i < tailLength; i++) {
+        if (tailX[i] == x && tailY[i] == y) {
+            gameOver = true;
+        }
+    }
+}
